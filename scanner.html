@@ -9,205 +9,65 @@
   name="viewport"
   content="width=device-width, initial-scale=1.0">
 
-<title>สแกน Barcode</title>
+<title>ทดสอบกล้อง Barcode</title>
 
 <script src="https://unpkg.com/html5-qrcode"></script>
 
-
 <style>
 
-*{
-  box-sizing:border-box;
-}
-
 body{
-
+  font-family:Arial,sans-serif;
   margin:0;
-
-  min-height:100vh;
-
-  font-family:
-    "Segoe UI",
-    sans-serif;
-
-  background:
-    linear-gradient(
-      135deg,
-      #fde2e4,
-      #e0f4ff
-    );
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  padding:15px;
-
+  padding:20px;
+  background:#f2f2f2;
 }
 
-
-.container{
-
-  width:100%;
-
+.box{
   max-width:500px;
-
-}
-
-
-.card{
-
+  margin:auto;
   background:#fff;
-
-  border-radius:22px;
-
-  padding:18px;
-
-  box-shadow:
-    0 10px 25px
-    rgba(0,0,0,.15);
-
+  padding:20px;
+  border-radius:20px;
+  box-shadow:0 5px 15px rgba(0,0,0,.15);
 }
 
-
-.title{
-
+h2{
   text-align:center;
-
-  font-size:23px;
-
-  font-weight:900;
-
-  color:#4a148c;
-
-  margin-bottom:8px;
-
 }
-
-
-.subtitle{
-
-  text-align:center;
-
-  color:#666;
-
-  font-size:14px;
-
-  margin-bottom:15px;
-
-}
-
 
 #reader{
-
   width:100%;
-
-  overflow:hidden;
-
-  border-radius:16px;
-
+  margin-top:15px;
 }
-
-
-#reader video{
-
-  border-radius:16px;
-
-}
-
 
 .status{
-
-  text-align:center;
-
-  margin-top:12px;
-
-  font-size:14px;
-
-  color:#666;
-
-}
-
-
-.result{
-
   margin-top:15px;
-
-  background:#f4effb;
-
-  border-radius:15px;
-
-  padding:15px;
-
-  display:none;
-
+  padding:12px;
+  border-radius:10px;
+  background:#eee;
+  text-align:center;
+  line-height:1.6;
 }
-
-
-.result-label{
-
-  color:#666;
-
-  font-size:13px;
-
-}
-
-
-.result-code{
-
-  color:#4a148c;
-
-  font-size:24px;
-
-  font-weight:900;
-
-  word-break:break-all;
-
-}
-
 
 button{
-
   width:100%;
-
-  border:none;
-
-  border-radius:15px;
-
-  padding:13px;
-
-  font-size:16px;
-
-  font-weight:700;
-
-  cursor:pointer;
-
-}
-
-
-.back-btn{
-
+  padding:14px;
   margin-top:12px;
-
-  background:#eee;
-
-  color:#555;
-
+  border:none;
+  border-radius:12px;
+  background:#4a148c;
+  color:#fff;
+  font-size:16px;
+  font-weight:bold;
 }
 
-
-.retry-btn{
-
-  margin-top:8px;
-
-  background:#4a148c;
-
-  color:#fff;
-
+.result{
+  margin-top:15px;
+  padding:15px;
+  background:#e8f5e9;
+  border-radius:12px;
   display:none;
-
+  text-align:center;
 }
 
 </style>
@@ -217,67 +77,46 @@ button{
 
 <body>
 
+<div class="box">
 
-<div class="container">
+<h2>📷 ทดสอบกล้องมือถือ</h2>
 
-  <div class="card">
+<div id="reader"></div>
 
-    <div class="title">
-      📷 สแกน Barcode สินค้า
-    </div>
+<div
+  id="status"
+  class="status">
 
-    <div class="subtitle">
-      หันกล้องหลังมือถือไปที่ Barcode
-    </div>
+กำลังตรวจสอบกล้อง...
 
+</div>
 
-    <div id="reader"></div>
+<div
+  id="result"
+  class="result">
 
+✅ สแกนสำเร็จ
 
-    <div
-      id="status"
-      class="status">
+<div
+  id="resultText"
+  style="font-size:24px;font-weight:bold;margin-top:10px;">
+</div>
 
-      กำลังเปิดกล้อง...
+</div>
 
-    </div>
+<button
+  onclick="startCamera()">
 
+📷 เปิดกล้อง
 
-    <div
-      id="result"
-      class="result">
+</button>
 
-      <div class="result-label">
-        Barcode ที่สแกนได้
-      </div>
+<button
+  onclick="stopCamera()">
 
-      <div
-        id="resultCode"
-        class="result-code">
-      </div>
+✕ ปิดกล้อง
 
-    </div>
-
-
-    <button
-      id="retryBtn"
-      class="retry-btn"
-      onclick="restartScanner()">
-
-      🔄 สแกนใหม่
-
-    </button>
-
-
-    <button
-      class="back-btn"
-      onclick="closeScanner()">
-
-      ✕ ปิดหน้าสแกน
-
-    </button>
-
-  </div>
+</button>
 
 </div>
 
@@ -288,53 +127,111 @@ let scanner = null;
 
 let running = false;
 
-let scanned = false;
-
 
 /* =====================================================
-   START
+   START CAMERA
 ===================================================== */
 
-window.addEventListener(
-  'load',
-  () => {
+async function startCamera(){
 
-    startScanner();
+  const status =
+    document.getElementById('status');
+
+
+  status.innerHTML =
+    'กำลังตรวจสอบระบบกล้อง...';
+
+
+  /* ===================================================
+     CHECK HTTPS
+  =================================================== */
+
+  if(
+    location.protocol !== 'https:' &&
+    location.hostname !== 'localhost'
+  ){
+
+    status.innerHTML =
+      '❌ หน้านี้ไม่ได้เปิดผ่าน HTTPS';
+
+    return;
 
   }
-);
 
 
-/* =====================================================
-   START SCANNER
-===================================================== */
+  /* ===================================================
+     CHECK BROWSER CAMERA API
+  =================================================== */
 
-function startScanner(){
+  if(
+    !navigator.mediaDevices ||
+    !navigator.mediaDevices.getUserMedia
+  ){
+
+    status.innerHTML =
+      '❌ Browser นี้ไม่รองรับการใช้งานกล้อง';
+
+    return;
+
+  }
+
+
+  /* ===================================================
+     REQUEST CAMERA PERMISSION DIRECTLY
+  =================================================== */
+
+  try{
+
+    const stream =
+      await navigator.mediaDevices.getUserMedia({
+        video:true
+      });
+
+
+    /* ปิด stream ทดสอบ */
+
+    stream
+      .getTracks()
+      .forEach(track => {
+        track.stop();
+      });
+
+
+    status.innerHTML =
+      '✅ ได้รับสิทธิ์ใช้กล้องแล้ว<br>' +
+      'กำลังเปิดตัวสแกน...';
+
+
+  }
+  catch(error){
+
+    console.error(error);
+
+
+    status.innerHTML =
+      '❌ ไม่สามารถใช้กล้องได้<br><br>' +
+      'Error: ' +
+      error.name +
+      '<br>' +
+      error.message;
+
+
+    return;
+
+  }
+
+
+  /* ===================================================
+     START BARCODE SCANNER
+  =================================================== */
 
   if(running){
     return;
   }
 
 
-  scanned = false;
-
-
-  document.getElementById(
-    'status'
-  ).textContent =
-    'กำลังเปิดกล้อง...';
-
-
-  document.getElementById(
-    'retryBtn'
-  ).style.display =
-    'none';
-
-
   scanner =
-    new Html5Qrcode(
-      'reader'
-    );
+    new Html5Qrcode('reader');
 
 
   running = true;
@@ -345,15 +242,10 @@ function startScanner(){
     .start(
 
       {
-        facingMode:
-          {
-            ideal:
-              'environment'
-        }
+        facingMode:'environment'
       },
 
       {
-
         fps:10,
 
         qrbox:{
@@ -371,29 +263,21 @@ function startScanner(){
 
     .then(() => {
 
-      document.getElementById(
-        'status'
-      ).textContent =
-        'กำลังสแกน...';
-
+      status.innerHTML =
+        '📷 กล้องพร้อมใช้งาน<br>' +
+        'นำ Barcode ไปไว้ในกรอบ';
 
     })
 
     .catch(error => {
 
+      console.error(error);
+
       running = false;
 
-      document.getElementById(
-        'status'
-      ).innerHTML =
-        '❌ ไม่สามารถเปิดกล้องได้<br>' +
-        'กรุณาอนุญาตการใช้กล้องของ Browser';
-
-
-      document.getElementById(
-        'retryBtn'
-      ).style.display =
-        'block';
+      status.innerHTML =
+        '❌ เปิดตัว Scanner ไม่สำเร็จ<br>' +
+        error;
 
     });
 
@@ -401,37 +285,12 @@ function startScanner(){
 
 
 /* =====================================================
-   SCAN SUCCESS
+   SUCCESS
 ===================================================== */
 
 function onScanSuccess(
   decodedText
 ){
-
-  if(scanned){
-    return;
-  }
-
-
-  scanned = true;
-
-
-  const barcode =
-    String(
-      decodedText || ''
-    ).trim();
-
-
-  if(!barcode){
-    return;
-  }
-
-
-  document.getElementById(
-    'resultCode'
-  ).textContent =
-    barcode;
-
 
   document.getElementById(
     'result'
@@ -440,18 +299,21 @@ function onScanSuccess(
 
 
   document.getElementById(
-    'status'
+    'resultText'
   ).textContent =
-    '✅ สแกนสำเร็จ';
+    decodedText;
 
 
-  stopScanner();
+  document.getElementById(
+    'status'
+  ).innerHTML =
+    '✅ สแกน Barcode สำเร็จ';
 
 
-  /*
-    ส่ง Barcode
-    กลับไปยังหน้าที่เปิด Scanner
-  */
+  stopCamera();
+
+
+  /* ส่งกลับหน้าเดิม */
 
   if(
     window.opener &&
@@ -459,26 +321,17 @@ function onScanSuccess(
   ){
 
     window.opener.postMessage(
+
       {
         type:
           'BARCODE_SCANNED',
 
         barcode:
-          barcode
+          decodedText
       },
 
       '*'
-    );
 
-
-    setTimeout(
-      () => {
-
-        window.close();
-
-      },
-
-      500
     );
 
   }
@@ -487,16 +340,11 @@ function onScanSuccess(
 
 
 /* =====================================================
-   SCAN ERROR
+   ERROR
 ===================================================== */
 
 function onScanError(){
-
-  /*
-    ไม่ต้องแสดง Error
-    ระหว่างกำลังค้นหา Barcode
-  */
-
+  // ไม่ต้องแสดง error ทุก frame
 }
 
 
@@ -504,125 +352,33 @@ function onScanError(){
    STOP
 ===================================================== */
 
-function stopScanner(){
+function stopCamera(){
 
   if(
     scanner &&
     running
   ){
 
-    const current =
-      scanner;
-
-
-    scanner = null;
-
-    running = false;
-
-
-    current
-
+    scanner
       .stop()
-
       .then(() => {
 
-        try{
-          current.clear();
-        }
-        catch(e){}
+        scanner.clear();
+
+        scanner = null;
+
+        running = false;
 
       })
-
       .catch(() => {
 
-        try{
-          current.clear();
-        }
-        catch(e){}
+        scanner = null;
+
+        running = false;
 
       });
 
   }
-
-}
-
-
-/* =====================================================
-   RETRY
-===================================================== */
-
-function restartScanner(){
-
-  stopScanner();
-
-
-  document.getElementById(
-    'result'
-  ).style.display =
-    'none';
-
-
-  setTimeout(
-    () => {
-
-      startScanner();
-
-    },
-
-    300
-  );
-
-}
-
-
-/* =====================================================
-   CLOSE
-===================================================== */
-
-function closeScanner(){
-
-  stopScanner();
-
-
-  if(
-    window.opener &&
-    !window.opener.closed
-  ){
-
-    /*
-      แจ้งหน้าหลักว่า
-      ยกเลิกการสแกน
-    */
-
-    window.opener.postMessage(
-      {
-        type:
-          'BARCODE_SCANNER_CLOSED'
-      },
-
-      '*'
-    );
-
-  }
-
-
-  window.close();
-
-
-  /*
-    กรณี Browser
-    ไม่อนุญาต window.close()
-  */
-
-  setTimeout(
-    () => {
-
-      history.back();
-
-    },
-
-    200
-  );
 
 }
 
