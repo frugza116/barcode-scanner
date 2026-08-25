@@ -13,6 +13,7 @@
 
 <script src="https://unpkg.com/html5-qrcode"></script>
 
+
 <style>
 
 *{
@@ -28,160 +29,297 @@ body{
 }
 
 body{
-  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
-  background:linear-gradient(135deg,#fde2e4,#e0f4ff);
+
+  font-family:
+    "Segoe UI",
+    Tahoma,
+    Arial,
+    sans-serif;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fde2e4,
+      #e0f4ff
+    );
+
   min-height:100vh;
+
   display:flex;
+
   justify-content:center;
+
   align-items:flex-start;
+
   padding:12px;
+
 }
+
 
 .container{
+
   width:100%;
+
   max-width:500px;
+
   margin-top:5px;
+
 }
+
 
 .card{
+
   width:100%;
+
   background:#fff;
+
   border-radius:22px;
+
   padding:16px;
-  box-shadow:0 10px 28px rgba(0,0,0,.16);
+
+  box-shadow:
+    0 10px 28px
+    rgba(0,0,0,.16);
+
 }
+
 
 .title{
+
   text-align:center;
+
   font-size:23px;
+
   font-weight:900;
+
   color:#4a148c;
+
   margin-bottom:5px;
+
 }
+
 
 .subtitle{
+
   text-align:center;
+
   color:#666;
+
   font-size:14px;
+
   line-height:1.5;
+
   margin-bottom:14px;
+
 }
+
 
 #reader{
+
   width:100%;
+
   min-height:260px;
+
   overflow:hidden;
+
   border-radius:18px;
+
   background:#111;
+
 }
+
 
 #reader video{
+
   width:100% !important;
+
   height:auto !important;
+
   display:block;
+
   border-radius:18px;
+
 }
+
 
 .status{
+
   margin-top:14px;
+
   padding:12px 14px;
+
   border-radius:14px;
+
   text-align:center;
+
   font-size:14px;
+
   line-height:1.6;
+
 }
+
 
 .status.info{
+
   background:#ede7f6;
+
   color:#4a148c;
+
 }
+
 
 .status.success{
+
   background:#e8f5e9;
+
   color:#1b5e20;
+
 }
+
 
 .status.error{
+
   background:#ffebee;
+
   color:#b71c1c;
+
 }
+
 
 .result{
+
   display:none;
+
   margin-top:14px;
+
   padding:16px;
+
   border-radius:16px;
+
   background:#f4effb;
+
   text-align:center;
+
 }
+
 
 .result-label{
+
   color:#666;
+
   font-size:13px;
+
   margin-bottom:6px;
+
 }
+
 
 .result-code{
+
   color:#4a148c;
+
   font-size:25px;
+
   line-height:1.3;
+
   font-weight:900;
+
   word-break:break-all;
+
 }
+
 
 .camera-select{
+
   width:100%;
+
   padding:13px;
+
   margin-top:12px;
+
   border:none;
+
   border-radius:14px;
+
   background:#f7f7f7;
+
   font-size:15px;
+
   display:none;
+
 }
+
 
 button{
+
   width:100%;
+
   padding:14px;
+
   margin-top:12px;
+
   border:none;
+
   border-radius:15px;
+
   font-size:16px;
+
   font-weight:800;
+
   cursor:pointer;
-  -webkit-tap-highlight-color:transparent;
+
 }
 
-button:active{
-  transform:scale(.98);
-}
 
 .open-btn{
+
   background:#4a148c;
+
   color:#fff;
+
 }
+
 
 .retry-btn{
+
   display:none;
+
   background:#4a148c;
+
   color:#fff;
+
 }
+
 
 .close-btn{
+
   background:#eee;
+
   color:#555;
+
 }
 
+
 .help{
+
   margin-top:14px;
+
   padding:12px;
+
   border-radius:14px;
+
   background:#fafafa;
+
   color:#666;
+
   font-size:13px;
+
   line-height:1.6;
+
   text-align:center;
+
 }
+
 
 @media(max-width:600px){
 
@@ -208,44 +346,61 @@ button:active{
 
 </head>
 
+
 <body>
+
 
 <div class="container">
 
   <div class="card">
 
+
     <div class="title">
+
       📷 สแกน Barcode สินค้า
+
     </div>
+
 
     <div class="subtitle">
+
       หันกล้องมือถือไปที่ Barcode<br>
+
       เช่น 8850051034149
+
     </div>
 
+
     <div id="reader"></div>
+
 
     <div
       id="status"
       class="status info">
 
-      กด <b>📷 เปิดกล้อง</b>
+      กด
+      <b>📷 เปิดกล้อง</b>
       เพื่อเริ่มสแกน
 
     </div>
+
 
     <select
       id="cameraSelect"
       class="camera-select">
     </select>
 
+
     <div
       id="result"
       class="result">
 
       <div class="result-label">
+
         Barcode ที่สแกนได้
+
       </div>
+
 
       <div
         id="resultCode"
@@ -253,6 +408,7 @@ button:active{
       </div>
 
     </div>
+
 
     <button
       id="openBtn"
@@ -263,6 +419,7 @@ button:active{
 
     </button>
 
+
     <button
       id="retryBtn"
       class="retry-btn"
@@ -272,6 +429,7 @@ button:active{
 
     </button>
 
+
     <button
       class="close-btn"
       onclick="closeScanner()">
@@ -280,10 +438,16 @@ button:active{
 
     </button>
 
+
     <div class="help">
-      เมื่อสแกนสำเร็จ ระบบจะส่ง Barcode
-      กลับไปยังหน้าหลักโดยอัตโนมัติ
+
+      ระบบจะพยายามใช้กล้องหลังมือถือก่อน<br>
+
+      เมื่อสแกนสำเร็จ Barcode จะถูกส่งกลับ
+      ไปยังหน้าระบบหลัก
+
     </div>
+
 
   </div>
 
@@ -297,7 +461,9 @@ button:active{
 ===================================================== */
 
 let scanner = null;
+
 let running = false;
+
 let scanned = false;
 
 
@@ -333,10 +499,12 @@ function setStatus(
   type = 'info'
 ){
 
-  statusEl.innerHTML = message;
+  statusEl.innerHTML =
+    message;
 
   statusEl.className =
     'status ' + type;
+
 }
 
 
@@ -350,17 +518,28 @@ async function startCamera(){
     return;
   }
 
+
   scanned = false;
 
-  resultEl.style.display = 'none';
 
-  resultCodeEl.textContent = '';
+  resultEl.style.display =
+    'none';
 
-  retryBtn.style.display = 'none';
 
-  cameraSelect.style.display = 'none';
+  resultCodeEl.textContent =
+    '';
 
-  openBtn.style.display = 'none';
+
+  retryBtn.style.display =
+    'none';
+
+
+  cameraSelect.style.display =
+    'none';
+
+
+  openBtn.style.display =
+    'none';
 
 
   setStatus(
@@ -370,7 +549,7 @@ async function startCamera(){
 
 
   /* ===================================================
-     CHECK HTTPS
+     HTTPS
   =================================================== */
 
   if(
@@ -383,18 +562,21 @@ async function startCamera(){
       'error'
     );
 
-    openBtn.style.display = 'block';
+    openBtn.style.display =
+      'block';
 
     return;
+
   }
 
 
   /* ===================================================
-     CHECK LIBRARY
+     LIBRARY
   =================================================== */
 
   if(
-    typeof Html5Qrcode === 'undefined'
+    typeof Html5Qrcode ===
+    'undefined'
   ){
 
     setStatus(
@@ -402,9 +584,11 @@ async function startCamera(){
       'error'
     );
 
-    openBtn.style.display = 'block';
+    openBtn.style.display =
+      'block';
 
     return;
+
   }
 
 
@@ -415,7 +599,9 @@ async function startCamera(){
   try{
 
     scanner =
-      new Html5Qrcode('reader');
+      new Html5Qrcode(
+        'reader'
+      );
 
   }
   catch(error){
@@ -429,19 +615,16 @@ async function startCamera(){
       'error'
     );
 
-    openBtn.style.display = 'block';
+    openBtn.style.display =
+      'block';
 
     return;
+
   }
 
 
   /* ===================================================
-     FIRST TRY:
-     USE ENVIRONMENT CAMERA
-     
-     สำคัญ:
-     ใช้ string ตรง ๆ
-     ไม่ใช้ getUserMedia เอง
+     TRY ENVIRONMENT CAMERA
   =================================================== */
 
   setStatus(
@@ -454,16 +637,19 @@ async function startCamera(){
 
     running = true;
 
+
     await scanner.start(
 
       'environment',
 
       {
         fps:10,
+
         qrbox:{
           width:280,
           height:160
         },
+
         aspectRatio:1.777
       },
 
@@ -491,14 +677,14 @@ async function startCamera(){
       error
     );
 
+
     running = false;
 
   }
 
 
   /* ===================================================
-     SECOND TRY:
-     SHOW CAMERA LIST
+     FALLBACK TO CAMERA LIST
   =================================================== */
 
   setStatus(
@@ -525,7 +711,9 @@ async function startCamera(){
     }
 
 
-    fillCameraList(cameras);
+    fillCameraList(
+      cameras
+    );
 
 
     cameraSelect.style.display =
@@ -534,12 +722,14 @@ async function startCamera(){
 
     setStatus(
       'พบกล้องแล้ว<br>' +
-      'กรุณาเลือกกล้องที่ต้องการใช้',
+      'กรุณาเลือกกล้อง',
       'info'
     );
 
 
-    if(cameras.length === 1){
+    if(
+      cameras.length === 1
+    ){
 
       cameraSelect.value =
         cameras[0].id;
@@ -567,7 +757,7 @@ async function startCamera(){
 
     setStatus(
       '❌ ไม่สามารถเข้าถึงกล้องได้<br><br>' +
-      'กรุณาตรวจสอบสิทธิ์ Camera ของ Browser',
+      'กรุณาตรวจสอบสิทธิ์ Camera',
       'error'
     );
 
@@ -597,7 +787,10 @@ function fillCameraList(
 
 
   cameras.forEach(
-    function(camera, index){
+    function(
+      camera,
+      index
+    ){
 
       const option =
         document.createElement(
@@ -613,7 +806,9 @@ function fillCameraList(
         camera.label ||
         (
           'กล้อง ' +
-          (index + 1)
+          (
+            index + 1
+          )
         );
 
 
@@ -647,7 +842,7 @@ function fillCameraList(
 
 
 /* =====================================================
-   START WITH CAMERA ID
+   START CAMERA ID
 ===================================================== */
 
 async function startWithCameraId(
@@ -680,10 +875,12 @@ async function startWithCameraId(
 
       {
         fps:10,
+
         qrbox:{
           width:280,
           height:160
         }
+
       },
 
       onScanSuccess,
@@ -703,7 +900,7 @@ async function startWithCameraId(
   catch(error){
 
     console.error(
-      'Camera ID start error:',
+      'Camera ID error:',
       error
     );
 
@@ -727,7 +924,7 @@ async function startWithCameraId(
 
 
 /* =====================================================
-   RESTART WITH CAMERA ID
+   RESTART CAMERA ID
 ===================================================== */
 
 async function restartWithCameraId(
@@ -811,19 +1008,15 @@ function onScanSuccess(
    SCAN ERROR
 ===================================================== */
 
-function onScanError(
-  errorMessage
-){
-
+function onScanError(){
   /*
-    ไม่ต้องแสดง error ทุก frame
+    ไม่แสดง error ระหว่าง scanning
   */
-
 }
 
 
 /* =====================================================
-   SEND BARCODE TO PARENT
+   SEND BARCODE
 ===================================================== */
 
 function sendBarcodeToParent(
@@ -838,6 +1031,7 @@ function sendBarcodeToParent(
     ){
 
       window.opener.postMessage(
+
         {
           type:
             'BARCODE_SCANNED',
@@ -845,7 +1039,9 @@ function sendBarcodeToParent(
           barcode:
             barcode
         },
+
         '*'
+
       );
 
 
@@ -853,7 +1049,9 @@ function sendBarcodeToParent(
         function(){
 
           try{
+
             window.close();
+
           }
           catch(e){}
 
@@ -861,16 +1059,21 @@ function sendBarcodeToParent(
         700
       );
 
+
     }
     else{
 
       setStatus(
+
         '✅ สแกนสำเร็จ<br>' +
         'Barcode: <b>' +
-        escapeHtml(barcode) +
-        '</b><br><br>' +
-        'เปิด Scanner โดยตรง',
+        escapeHtml(
+          barcode
+        ) +
+        '</b>',
+
         'success'
+
       );
 
 
@@ -882,7 +1085,9 @@ function sendBarcodeToParent(
   }
   catch(error){
 
-    console.error(error);
+    console.error(
+      error
+    );
 
   }
 
@@ -890,7 +1095,7 @@ function sendBarcodeToParent(
 
 
 /* =====================================================
-   STOP SCANNER
+   STOP
 ===================================================== */
 
 async function stopScanner(){
@@ -1084,7 +1289,7 @@ function escapeHtml(
 
 
 /* =====================================================
-   BEFORE CLOSE
+   CLEANUP
 ===================================================== */
 
 window.addEventListener(
