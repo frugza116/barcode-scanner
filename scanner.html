@@ -6,14 +6,12 @@
 <meta charset="UTF-8">
 
 <meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+name="viewport"
+content="width=device-width,initial-scale=1">
 
 <title>สแกน Barcode สินค้า</title>
 
-
 <script src="https://unpkg.com/html5-qrcode"></script>
-
 
 <style>
 
@@ -21,20 +19,16 @@
   box-sizing:border-box;
 }
 
-html,
 body{
-  margin:0;
-  padding:0;
-  width:100%;
-  min-height:100%;
-}
 
-body{
+  margin:0;
+
+  padding:10px;
+
+  min-height:100vh;
 
   font-family:
     "Segoe UI",
-    Tahoma,
-    Arial,
     sans-serif;
 
   background:
@@ -44,61 +38,41 @@ body{
       #e0f4ff
     );
 
-  min-height:100vh;
-
-  display:flex;
-
-  justify-content:center;
-
-  align-items:flex-start;
-
-  padding:12px;
-
 }
-
-
-.container{
-
-  width:100%;
-
-  max-width:500px;
-
-  margin-top:5px;
-
-}
-
 
 .card{
 
   width:100%;
 
+  max-width:500px;
+
+  margin:auto;
+
+  padding:15px;
+
   background:#fff;
 
   border-radius:22px;
 
-  padding:16px;
-
   box-shadow:
-    0 10px 28px
-    rgba(0,0,0,.16);
+    0 10px 25px
+    rgba(0,0,0,.15);
 
 }
-
 
 .title{
 
   text-align:center;
 
-  font-size:23px;
+  color:#4a148c;
+
+  font-size:22px;
 
   font-weight:900;
 
-  color:#4a148c;
-
-  margin-bottom:5px;
+  margin-bottom:6px;
 
 }
-
 
 .subtitle{
 
@@ -108,18 +82,15 @@ body{
 
   font-size:14px;
 
-  line-height:1.5;
-
-  margin-bottom:14px;
+  margin-bottom:15px;
 
 }
-
 
 #reader{
 
   width:100%;
 
-  min-height:260px;
+  min-height:250px;
 
   overflow:hidden;
 
@@ -129,38 +100,31 @@ body{
 
 }
 
-
 #reader video{
 
   width:100% !important;
 
   height:auto !important;
 
-  display:block;
-
-  border-radius:18px;
-
 }
-
 
 .status{
 
-  margin-top:14px;
+  margin-top:12px;
 
-  padding:12px 14px;
+  padding:12px;
 
   border-radius:14px;
 
   text-align:center;
 
-  font-size:14px;
-
   line-height:1.6;
+
+  font-size:14px;
 
 }
 
-
-.status.info{
+.info{
 
   background:#ede7f6;
 
@@ -168,8 +132,7 @@ body{
 
 }
 
-
-.status.success{
+.success{
 
   background:#e8f5e9;
 
@@ -177,8 +140,7 @@ body{
 
 }
 
-
-.status.error{
+.error{
 
   background:#ffebee;
 
@@ -186,16 +148,15 @@ body{
 
 }
 
-
 .result{
 
   display:none;
 
-  margin-top:14px;
+  margin-top:12px;
 
-  padding:16px;
+  padding:15px;
 
-  border-radius:16px;
+  border-radius:15px;
 
   background:#f4effb;
 
@@ -203,51 +164,19 @@ body{
 
 }
 
-
-.result-label{
-
-  color:#666;
-
-  font-size:13px;
-
-  margin-bottom:6px;
-
-}
-
-
 .result-code{
+
+  margin-top:5px;
 
   color:#4a148c;
 
-  font-size:25px;
+  font-size:24px;
 
   font-weight:900;
 
   word-break:break-all;
 
 }
-
-
-.camera-select{
-
-  width:100%;
-
-  padding:13px;
-
-  margin-top:12px;
-
-  border:none;
-
-  border-radius:14px;
-
-  background:#f7f7f7;
-
-  font-size:15px;
-
-  display:none;
-
-}
-
 
 button{
 
@@ -265,10 +194,7 @@ button{
 
   font-weight:800;
 
-  cursor:pointer;
-
 }
-
 
 .open-btn{
 
@@ -277,7 +203,6 @@ button{
   color:#fff;
 
 }
-
 
 .retry-btn{
 
@@ -289,54 +214,11 @@ button{
 
 }
 
-
 .close-btn{
 
   background:#eee;
 
   color:#555;
-
-}
-
-
-.help{
-
-  margin-top:14px;
-
-  padding:12px;
-
-  border-radius:14px;
-
-  background:#fafafa;
-
-  color:#666;
-
-  font-size:13px;
-
-  line-height:1.6;
-
-  text-align:center;
-
-}
-
-
-@media(max-width:600px){
-
-  body{
-    padding:8px;
-  }
-
-  .card{
-    padding:13px;
-  }
-
-  .title{
-    font-size:21px;
-  }
-
-  #reader{
-    min-height:240px;
-  }
 
 }
 
@@ -347,112 +229,80 @@ button{
 
 <body>
 
-
-<div class="container">
-
-  <div class="card">
+<div class="card">
 
 
-    <div class="title">
-
-      📷 สแกน Barcode สินค้า
-
-    </div>
+  <div class="title">
+    📷 สแกน Barcode สินค้า
+  </div>
 
 
-    <div class="subtitle">
-
-      หันกล้องหลังมือถือไปที่ Barcode<br>
-
-      เช่น 8850051034149
-
-    </div>
+  <div class="subtitle">
+    หันกล้องหลังมือถือไปที่ Barcode
+  </div>
 
 
-    <div id="reader"></div>
+  <div id="reader"></div>
 
 
-    <div
-      id="status"
-      class="status info">
+  <div
+    id="status"
+    class="status info">
 
-      กด
-      <b>📷 เปิดกล้อง</b>
-      เพื่อเริ่มสแกน
-
-    </div>
-
-
-    <select
-      id="cameraSelect"
-      class="camera-select">
-    </select>
-
-
-    <div
-      id="result"
-      class="result">
-
-      <div class="result-label">
-
-        Barcode ที่สแกนได้
-
-      </div>
-
-
-      <div
-        id="resultCode"
-        class="result-code">
-      </div>
-
-    </div>
-
-
-    <button
-      id="openBtn"
-      class="open-btn"
-      onclick="startCamera()">
-
-      📷 เปิดกล้อง
-
-    </button>
-
-
-    <button
-      id="retryBtn"
-      class="retry-btn"
-      onclick="restartScanner()">
-
-      🔄 สแกนใหม่
-
-    </button>
-
-
-    <button
-      class="close-btn"
-      onclick="closeScanner()">
-
-      ✕ ปิดหน้าสแกน
-
-    </button>
-
-
-    <div class="help">
-
-      ระบบจะใช้กล้องหลังมือถือก่อน<br>
-
-      เมื่อสแกนสำเร็จ
-      ระบบจะส่ง Barcode กลับไป Apps Script
-
-    </div>
-
+    กด
+    <b>📷 เปิดกล้อง</b>
 
   </div>
+
+
+  <div
+    id="result"
+    class="result">
+
+    Barcode ที่อ่านได้
+
+    <div
+      id="resultCode"
+      class="result-code">
+    </div>
+
+  </div>
+
+
+  <button
+    id="openBtn"
+    class="open-btn"
+    onclick="startCamera()">
+
+    📷 เปิดกล้อง
+
+  </button>
+
+
+  <button
+    id="retryBtn"
+    class="retry-btn"
+    onclick="restartScanner()">
+
+    🔄 สแกนใหม่
+
+  </button>
+
+
+  <button
+    class="close-btn"
+    onclick="closeScanner()">
+
+    ✕ ปิด
+
+  </button>
+
 
 </div>
 
 
 <script>
+
 
 /* =====================================================
    CONFIG
@@ -460,15 +310,14 @@ button{
 
 
 /*
-  URL Web App ของ Google Apps Script
+  URL Web App ของ Apps Script
 
-  ตัวอย่าง:
-
-  https://script.google.com/macros/s/AKfycbxxxxxx/exec
+  สำคัญ:
+  ต้องเป็น /exec
 */
 
 const SCRIPT_URL =
-  'https://script.google.com/macros/s/AKfycbyLp5KF3m1VRnlhpsZoNOB3-iIPJk6TGJ_-F1rjUBZw_i2ksN1Q-U1e7HqFb54OgK5T/exec';
+  'https://script.google.com/macros/s/AKfycby8Gizou10murE7uFHv9_3vB7q0Dpy5M-HkjhtHwYRENITNXvrLaAwX2TNOHJArKPem/exec';
 
 
 /* =====================================================
@@ -482,6 +331,8 @@ let running = false;
 let scanned = false;
 
 let sessionId = null;
+
+let sendFinished = false;
 
 
 /* =====================================================
@@ -513,21 +364,16 @@ const retryBtn =
     'retryBtn'
   );
 
-const cameraSelect =
-  document.getElementById(
-    'cameraSelect'
-  );
-
 
 /* =====================================================
-   SESSION FROM URL
+   SESSION
 ===================================================== */
 
-function getSessionId(){
+function getSession(){
 
   const params =
     new URLSearchParams(
-      window.location.search
+      location.search
     );
 
 
@@ -545,60 +391,16 @@ function getSessionId(){
 ===================================================== */
 
 function setStatus(
-  message,
-  type = 'info'
+  text,
+  type='info'
 ){
 
   statusEl.innerHTML =
-    message;
+    text;
 
   statusEl.className =
     'status ' +
     type;
-
-}
-
-
-/* =====================================================
-   CHECK CONFIG
-===================================================== */
-
-function checkConfig(){
-
-  if(
-    !SCRIPT_URL ||
-    SCRIPT_URL.includes(
-      'ใส่_DEPLOYMENT_ID'
-    )
-  ){
-
-    setStatus(
-      '❌ ยังไม่ได้ใส่ URL Apps Script',
-      'error'
-    );
-
-    return false;
-
-  }
-
-
-  sessionId =
-    getSessionId();
-
-
-  if(!sessionId){
-
-    setStatus(
-      '❌ ไม่พบ Scan Session',
-      'error'
-    );
-
-    return false;
-
-  }
-
-
-  return true;
 
 }
 
@@ -614,9 +416,16 @@ async function startCamera(){
   }
 
 
-  if(
-    !checkConfig()
-  ){
+  sessionId =
+    getSession();
+
+
+  if(!sessionId){
+
+    setStatus(
+      '❌ ไม่พบ Session ID',
+      'error'
+    );
 
     return;
 
@@ -626,20 +435,15 @@ async function startCamera(){
   scanned =
     false;
 
+  sendFinished =
+    false;
+
 
   resultEl.style.display =
     'none';
 
 
-  resultCodeEl.textContent =
-    '';
-
-
   retryBtn.style.display =
-    'none';
-
-
-  cameraSelect.style.display =
     'none';
 
 
@@ -648,62 +452,10 @@ async function startCamera(){
 
 
   setStatus(
-    'กำลังเปิดกล้อง...',
+    '📷 กำลังเปิดกล้อง...',
     'info'
   );
 
-
-  /*
-    ตรวจ HTTPS
-  */
-
-  if(
-    location.protocol !==
-    'https:'
-  ){
-
-    setStatus(
-      '❌ GitHub Pages ต้องเปิดผ่าน HTTPS',
-      'error'
-    );
-
-
-    openBtn.style.display =
-      'block';
-
-
-    return;
-
-  }
-
-
-  /*
-    ตรวจ Library
-  */
-
-  if(
-    typeof Html5Qrcode ===
-    'undefined'
-  ){
-
-    setStatus(
-      '❌ โหลดระบบ Scanner ไม่สำเร็จ',
-      'error'
-    );
-
-
-    openBtn.style.display =
-      'block';
-
-
-    return;
-
-  }
-
-
-  /*
-    สร้าง Scanner
-  */
 
   try{
 
@@ -712,35 +464,6 @@ async function startCamera(){
         'reader'
       );
 
-
-  }
-  catch(error){
-
-    console.error(
-      error
-    );
-
-
-    setStatus(
-      '❌ สร้าง Scanner ไม่สำเร็จ',
-      'error'
-    );
-
-
-    openBtn.style.display =
-      'block';
-
-
-    return;
-
-  }
-
-
-  /*
-    เปิดกล้องหลัง
-  */
-
-  try{
 
     running =
       true;
@@ -751,222 +474,7 @@ async function startCamera(){
       'environment',
 
       {
-        fps:10,
 
-        qrbox:{
-          width:280,
-          height:160
-        },
-
-        aspectRatio:1.777
-
-      },
-
-      onScanSuccess,
-
-      onScanError
-
-    );
-
-
-    setStatus(
-      '📷 กล้องพร้อมใช้งาน<br>' +
-      'นำ Barcode มาไว้ในกรอบ',
-      'success'
-    );
-
-
-    return;
-
-  }
-  catch(error){
-
-    console.warn(
-      'Environment camera error:',
-      error
-    );
-
-
-    running =
-      false;
-
-  }
-
-
-  /*
-    ถ้าเปิด environment ไม่ได้
-    ให้เลือกจากรายการกล้อง
-  */
-
-  try{
-
-    const cameras =
-      await Html5Qrcode.getCameras();
-
-
-    if(
-      !cameras ||
-      cameras.length === 0
-    ){
-
-      throw new Error(
-        'ไม่พบกล้อง'
-      );
-
-    }
-
-
-    fillCameraList(
-      cameras
-    );
-
-
-    cameraSelect.style.display =
-      'block';
-
-
-    setStatus(
-      'พบกล้องแล้ว<br>' +
-      'กรุณาเลือกกล้อง',
-      'info'
-    );
-
-
-    if(
-      cameras.length === 1
-    ){
-
-      cameraSelect.value =
-        cameras[0].id;
-
-
-      await startWithCameraId(
-        cameras[0].id
-      );
-
-    }
-
-  }
-  catch(error){
-
-    console.error(
-      error
-    );
-
-
-    setStatus(
-      '❌ ไม่สามารถเปิดกล้องได้<br>' +
-      'กรุณาตรวจสอบสิทธิ์ Camera',
-      'error'
-    );
-
-
-    retryBtn.style.display =
-      'block';
-
-
-    openBtn.style.display =
-      'block';
-
-  }
-
-}
-
-
-/* =====================================================
-   CAMERA LIST
-===================================================== */
-
-function fillCameraList(
-  cameras
-){
-
-  cameraSelect.innerHTML =
-    '';
-
-
-  cameras.forEach(
-    function(
-      camera,
-      index
-    ){
-
-      const option =
-        document.createElement(
-          'option'
-        );
-
-
-      option.value =
-        camera.id;
-
-
-      option.textContent =
-        camera.label ||
-        (
-          'กล้อง ' +
-          (index + 1)
-        );
-
-
-      cameraSelect.appendChild(
-        option
-      );
-
-    }
-  );
-
-
-  cameraSelect.onchange =
-    async function(){
-
-      const cameraId =
-        this.value;
-
-
-      if(!cameraId){
-        return;
-      }
-
-
-      await restartWithCameraId(
-        cameraId
-      );
-
-    };
-
-}
-
-
-/* =====================================================
-   START WITH CAMERA ID
-===================================================== */
-
-async function startWithCameraId(
-  cameraId
-){
-
-  try{
-
-    if(!scanner){
-
-      scanner =
-        new Html5Qrcode(
-          'reader'
-        );
-
-    }
-
-
-    running =
-      true;
-
-
-    await scanner.start(
-
-      cameraId,
-
-      {
         fps:10,
 
         qrbox:{
@@ -978,7 +486,7 @@ async function startWithCameraId(
 
       onScanSuccess,
 
-      onScanError
+      function(){}
 
     );
 
@@ -990,6 +498,7 @@ async function startWithCameraId(
     );
 
   }
+
   catch(error){
 
     console.error(
@@ -1001,8 +510,13 @@ async function startWithCameraId(
       false;
 
 
+    scanner =
+      null;
+
+
     setStatus(
-      '❌ เปิดกล้องนี้ไม่สำเร็จ',
+      '❌ เปิดกล้องไม่ได้<br>' +
+      String(error),
       'error'
     );
 
@@ -1010,32 +524,11 @@ async function startWithCameraId(
     retryBtn.style.display =
       'block';
 
+
+    openBtn.style.display =
+      'block';
+
   }
-
-}
-
-
-/* =====================================================
-   RESTART CAMERA ID
-===================================================== */
-
-async function restartWithCameraId(
-  cameraId
-){
-
-  await stopScanner();
-
-
-  setTimeout(
-    function(){
-
-      startWithCameraId(
-        cameraId
-      );
-
-    },
-    300
-  );
 
 }
 
@@ -1045,8 +538,7 @@ async function restartWithCameraId(
 ===================================================== */
 
 function onScanSuccess(
-  decodedText,
-  decodedResult
+  decodedText
 ){
 
   if(scanned){
@@ -1078,8 +570,8 @@ function onScanSuccess(
 
 
   setStatus(
-    '✅ สแกนสำเร็จ<br>' +
-    'กำลังส่งข้อมูล...',
+    '✅ สแกนได้แล้ว<br>' +
+    'กำลังส่งข้อมูลเข้า Apps Script...',
     'success'
   );
 
@@ -1088,7 +580,7 @@ function onScanSuccess(
     .then(
       function(){
 
-        sendBarcodeToApp(
+        sendBarcode(
           barcode
         );
 
@@ -1099,69 +591,81 @@ function onScanSuccess(
 
 
 /* =====================================================
-   SCAN ERROR
+   SEND BARCODE
 ===================================================== */
 
-function onScanError(){
-  /*
-    ไม่แสดง error ทุก frame
-  */
-}
-
-
-/* =====================================================
-   SEND BARCODE TO APPS SCRIPT
-===================================================== */
-
-function sendBarcodeToApp(
+function sendBarcode(
   barcode
 ){
 
-  const params =
-    new URLSearchParams();
+  if(sendFinished){
+    return;
+  }
 
 
-  params.set(
-    'action',
-    'saveScan'
-  );
+  if(!SCRIPT_URL){
 
+    setStatus(
+      '❌ ไม่พบ URL Apps Script',
+      'error'
+    );
 
-  params.set(
-    'session',
-    sessionId
-  );
+    return;
 
-
-  params.set(
-    'barcode',
-    barcode
-  );
+  }
 
 
   const url =
     SCRIPT_URL +
-    '?' +
-    params.toString() +
+    '?action=saveScan' +
+    '&session=' +
+    encodeURIComponent(
+      sessionId
+    ) +
+    '&barcode=' +
+    encodeURIComponent(
+      barcode
+    ) +
     '&t=' +
     Date.now();
 
 
+  console.log(
+    'SEND URL:',
+    url
+  );
+
+
   /*
-    ใช้ Image Beacon
-    เพื่อไม่ติด CORS
+    สร้าง Image request
   */
 
   const img =
     new Image();
 
 
-  img.onload =
+  let done =
+    false;
+
+
+  const finish =
     function(){
 
+      if(done){
+        return;
+      }
+
+
+      done =
+        true;
+
+      sendFinished =
+        true;
+
+
       setStatus(
-        '✅ ส่ง Barcode กลับระบบแล้ว<br>' +
-        'กำลังกลับหน้าระบบ...',
+        '✅ ส่ง Barcode เข้า Apps Script แล้ว<br>' +
+        'กำลังกลับหน้าหลัก...',
         'success'
       );
 
@@ -1169,51 +673,41 @@ function sendBarcodeToApp(
       setTimeout(
         function(){
 
-          closeWindow();
+          closeScannerWindow();
 
         },
-        600
+        1000
       );
 
     };
+
+
+  img.onload =
+    finish;
 
 
   img.onerror =
-    function(){
-
-      /*
-        แม้ Image error
-        คำขอ GET มักถูกส่งออกไปแล้ว
-        ให้รอ Apps Script Poll ต่อ
-      */
-
-      setStatus(
-        '✅ ส่ง Barcode แล้ว<br>' +
-        'กำลังกลับหน้าระบบ...',
-        'success'
-      );
-
-
-      setTimeout(
-        function(){
-
-          closeWindow();
-
-        },
-        600
-      );
-
-    };
+    finish;
 
 
   img.src =
     url;
 
+
+  /*
+    กัน Browser ไม่ยิง event
+  */
+
+  setTimeout(
+    finish,
+    3000
+  );
+
 }
 
 
 /* =====================================================
-   STOP SCANNER
+   STOP
 ===================================================== */
 
 async function stopScanner(){
@@ -1224,7 +718,6 @@ async function stopScanner(){
   ){
 
     return;
-
   }
 
 
@@ -1245,13 +738,7 @@ async function stopScanner(){
     await current.stop();
 
   }
-  catch(error){
-
-    console.log(
-      error
-    );
-
-  }
+  catch(e){}
 
 
   try{
@@ -1259,13 +746,7 @@ async function stopScanner(){
     current.clear();
 
   }
-  catch(error){
-
-    console.log(
-      error
-    );
-
-  }
+  catch(e){}
 
 }
 
@@ -1283,6 +764,10 @@ async function restartScanner(){
     false;
 
 
+  sendFinished =
+    false;
+
+
   resultEl.style.display =
     'none';
 
@@ -1291,12 +776,8 @@ async function restartScanner(){
     '';
 
 
-  cameraSelect.style.display =
-    'none';
-
-
   setStatus(
-    'กำลังเตรียมกล้อง...',
+    '📷 กำลังเตรียมกล้อง...',
     'info'
   );
 
@@ -1314,7 +795,7 @@ async function restartScanner(){
 
 
 /* =====================================================
-   CLOSE WINDOW
+   CLOSE
 ===================================================== */
 
 async function closeScanner(){
@@ -1322,46 +803,7 @@ async function closeScanner(){
   await stopScanner();
 
 
-  /*
-    แจ้งยกเลิก Session
-  */
-
-  if(
-    SCRIPT_URL &&
-    sessionId
-  ){
-
-    const params =
-      new URLSearchParams();
-
-
-    params.set(
-      'action',
-      'cancelScan'
-    );
-
-
-    params.set(
-      'session',
-      sessionId
-    );
-
-
-    const img =
-      new Image();
-
-
-    img.src =
-      SCRIPT_URL +
-      '?' +
-      params.toString() +
-      '&t=' +
-      Date.now();
-
-  }
-
-
-  closeWindow();
+  closeScannerWindow();
 
 }
 
@@ -1370,7 +812,7 @@ async function closeScanner(){
    CLOSE WINDOW
 ===================================================== */
 
-function closeWindow(){
+function closeScannerWindow(){
 
   try{
 
@@ -1396,94 +838,6 @@ function closeWindow(){
   );
 
 }
-
-
-/* =====================================================
-   ESCAPE HTML
-===================================================== */
-
-function escapeHtml(
-  value
-){
-
-  return String(
-    value ?? ''
-  )
-
-  .replace(
-    /&/g,
-    '&amp;'
-  )
-
-  .replace(
-    /</g,
-    '&lt;'
-  )
-
-  .replace(
-    />/g,
-    '&gt;'
-  )
-
-  .replace(
-    /"/g,
-    '&quot;'
-  )
-
-  .replace(
-    /'/g,
-    '&#039;'
-  );
-
-}
-
-
-/* =====================================================
-   START AUTOMATICALLY
-===================================================== */
-
-window.addEventListener(
-  'load',
-  function(){
-
-    /*
-      ไม่เปิดกล้องทันที
-      ให้ผู้ใช้กดปุ่มก่อน
-      เพื่อให้ Browser ยอมให้ Camera
-    */
-
-  }
-);
-
-
-/* =====================================================
-   CLEANUP
-===================================================== */
-
-window.addEventListener(
-  'beforeunload',
-  function(){
-
-    try{
-
-      if(
-        scanner &&
-        running
-      ){
-
-        scanner
-          .stop()
-          .catch(
-            function(){}
-          );
-
-      }
-
-    }
-    catch(e){}
-
-  }
-);
 
 </script>
 
